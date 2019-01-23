@@ -14,6 +14,11 @@ Methods:
     #sends the move to the GMC
 
 
+== BUFFER ==
+-
+-
+
+
 == MAIN ==
 -
 -
@@ -25,31 +30,26 @@ Methods:
 
 
 == MOVE ==
--
--
+Object that holds movements
+Ex: E1E2
 
 
 == MOVEMENT ==
--
--
-
+Object that represents at individual movement
+Ex: pick up piece at E1
 
 == MOVEMENT QUEUE ==
--
--
+Buffer that holds a set of movements as a move and sends them individually to RM (as Gcode?)
 
 
 == MOVE TOOLS ==
--
--
-
-
-== RECORDER ==
--
--
+Creates moves from input from IR
 
 
 == STATE CONTROLLER ==
--
--
-
+Keeps track of the game state (Start, player, ai, gameover, incorrect[1..maxstate])
+Start - game has started, no moves made yet
+Player - player's turn
+AI - computers turn
+Gameover - game has ended
+Incorrect - some error or issue has come up.
