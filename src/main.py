@@ -1,3 +1,11 @@
+"""
+
+The runtime loop loops each turn
+The model is updated
+Either the user or AI move is performed each loop
+
+"""
+
 terminate = False
 
 while not terminate:
