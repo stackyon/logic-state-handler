@@ -1,6 +1,17 @@
 == AI ==
--
--
+Communicating with the AI, for Rev0 we don't need to actually communicate with the server but just set up the methods.
+Methods:
+  get_board_state(board_state_input)
+    #gets the state of the board from the GMC and keeps it in a variable 
+    board_state = board_state_input
+  
+  get_move(board_state)
+    #sends board state to AI to request move back
+  
+  next_move = get_move(board_state);
+  
+  send_move(next_move)
+    #sends the move to the GMC
 
 
 == MAIN ==
