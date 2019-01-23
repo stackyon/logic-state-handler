@@ -3,7 +3,6 @@ import movement as movement
 
 #get a player move from an input string
 def build_move(move_code):
-    movement_codes = move_code.split(',')
     for movement_code in movement_codes:
         new_movements = []
         # 3 digit code, use enum to compare type digit

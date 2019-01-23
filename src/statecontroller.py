@@ -7,3 +7,6 @@ class State:
 def refreshstate():
     # direct between states
     # call on model after each move
+
+def error(error_code):
+    # throw error light or otherwise
