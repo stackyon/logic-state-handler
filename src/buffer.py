@@ -14,6 +14,6 @@ def read_buffer():
 
     move_codes = dummy_buffer.split(',')
     if move_codes[1] == 'm':
-        movetools.build_move(move_codes[2])
+        return movetools.build_move(move_codes[2])
     if move_codes[1] == 'e':
         statecontroller.error(move_codes[2])
