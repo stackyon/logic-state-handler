@@ -10,6 +10,7 @@ import model
 import statecontroller
 import ai
 import buffer
+import movementqueue
 
 
 terminate = False
@@ -18,10 +19,11 @@ while not terminate:
     buffer.read_buffer()
     if not statecontroller.is_error():
         irs_move_code = buffer.read_buffer()
-        model.record_move(irs_move_code)
-        ai.get_ai_move()
+        model.record_player_move(irs_move_code)
+        ai_move = ai.record_ai_move()
+        for movement in ai_move.movements:
+            movementqueue.add_movement(movement)
     else:
-    # check movement status and do recordmove()
-    # update model refresh() and confirm consistency
-    # update state refreshstate()
-    # update movement queue with new moves from AI
+        # determine undo if board error, add to movement queue
+        print('player move was invalid')
+
