@@ -1,8 +1,10 @@
+from enum import Enum
+
 state = State.start;
 maxstate = 5
 error = False
 
-class State:
+class State(Enum):
     start, player, ai, gameover, incorrect = range(1, maxstate)
 
 def refreshstate():

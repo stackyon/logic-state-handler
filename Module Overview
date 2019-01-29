@@ -25,8 +25,7 @@ Methods:
 
 
 == MODEL ==
--
--
+Reads buffer, calls BuildMove from Movetools, returns to Main runtime loop
 
 
 == MOVE ==
