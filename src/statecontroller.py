@@ -10,3 +10,4 @@ def refreshstate():
 
 def error(error_code):
     # throw error light or otherwise
+    print('error: ' + error_code)
