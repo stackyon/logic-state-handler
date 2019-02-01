@@ -16,16 +16,22 @@ def build_move(move_code):
     return new_move
 
 
-def coordinates(square_code):
+def coordinates(p_square_code):
     x_y = []
-    x_y.append(ord(square_code[:1]) - 96)
-    x_y.append(int(square_code[1:]))
+    x_y.append(ord(p_square_code[:1]) - 96)
+    x_y.append(int(p_square_code[1:]))
     return x_y
     # return a tuple x,y for square number
 
 
+def get_uci(p_move):
+    uci_from = square_code(p_move.movements[0].square_x, p_move.movements[0].square_y)
+    uci_to = square_code(p_move.movements[1].square_x, p_move.movements[1].square_y)
+    return uci_from + uci_to
+
+
 def square_code(x, y):
-    return chr(x + 96) + y
+    return chr(x + 96) + str(y)
 
 
 """

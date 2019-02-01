@@ -1,20 +1,23 @@
 import chess
 import movetools
-import buffer
 
 
 class Model:
-    chess_board = 0
+
+    chess_board = chess.Board()
 
     @staticmethod
-    def record_player_move(move_message):
-        player_move = movetools.build_move(move_message)
-        move_uci = player_move.move[1], player_move.move[2]
-        enter_move(move_uci)
+    def record_player_move(player_move):
+        move_uci = movetools.get_uci(player_move)
+        Model.enter_move(move_uci)
 
     @staticmethod
     def enter_move(move_uci):
-        chess.Move.from_uci(move_uci) in Model.chess_board.legal_moves
+        if chess.Move.from_uci(move_uci) in Model.chess_board.legal_moves:
+            Model.chess_board.push(chess.Move.from_uci(move_uci))
+            print(Model.chess_board.unicode())
+        else:
+            print('ILLEGAL MOVE!')
 
     @staticmethod
     def reset():
