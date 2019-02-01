@@ -9,7 +9,7 @@ import statecontroller
 
 
 def read_buffer():
-    #read from the server
+    # read from the server
     dummy_buffer = 'p,m,e1e2'
 
     move_codes = dummy_buffer.split(',')

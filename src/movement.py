@@ -8,7 +8,9 @@ class MovementType(Enum):
     up = 2
     down = 3
 
+
 class Movement:
-    def __init__(self, movement_type, square):
+    def __init__(self, movement_type, squareX, squareY):
         self.movement_type = movement_type  # MovementType
-        self.square = square    # string eg E8
+        self.square_x = squareX    # int in place of letter
+        self.square_y = squareY
