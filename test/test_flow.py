@@ -2,6 +2,8 @@ import unittest
 import buffer
 import movetools
 import model
+import ai
+import movementqueue
 
 
 class TestFlow(unittest.TestCase):
@@ -12,22 +14,33 @@ class TestFlow(unittest.TestCase):
         assert x_y[1] == 1
 
     def test_buffer(self):
-        move1 = buffer.read_buffer('p,m,e1e2')
+        move1 = buffer.read_buffer('p,m,e2e3')
         assert move1.movements[0].movement_type == 'up'
         assert move1.movements[0].square_x == 5
-        assert move1.movements[0].square_y == 1
+        assert move1.movements[0].square_y == 2
         assert move1.movements[1].movement_type == 'down'
         assert move1.movements[1].square_x == 5
-        assert move1.movements[1].square_y == 2
+        assert move1.movements[1].square_y == 3
 
     def test_record_move(self):
-        move1 = buffer.read_buffer('p,m,c2c3')
+        move1 = buffer.read_buffer('p,m,e2e3')
         model.Model.record_player_move(move1)
 
+    def test_add_move(self):
+        move1 = buffer.read_buffer('p,m,c2c3')
+        movementqueue.add_move(move1)
+        movementqueue.print_queue()
 
-"""
-def test_ai_move(self):
-"""
+    def test_ai_move(self):
+        ai.AI.get_ai_move('a2a4')
+        movementqueue.print_queue()
+
+    def test_both_move(self):
+        move1 = buffer.read_buffer('p,m,c2c3')
+        model.Model.record_player_move(move1)
+        movementqueue.add_move(move1)
+        ai.AI.get_ai_move('a7a5')
+        movementqueue.print_queue()
 
 
 if __name__ == '__main__':

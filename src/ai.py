@@ -1,13 +1,16 @@
-import chess
 import movementqueue
+import model
+import movetools
+import statecontroller
 
 
 class AI:
-    def get_ai_move(self):
-        # reference model
-        # call ai based on model
-        # create move(chess.A1, chess.B2, chess.Piece(type, color))
-        # send move to movement queue
-        ai_move = 'this will be a move'
-        for movement in ai_move.movements:
-            movementqueue.add_movement()
+    @staticmethod
+    def get_ai_move(dummy_uci):
+        ai_move_code = dummy_uci    # get uci from server instead of dummy
+        model.Model.enter_move(ai_move_code)
+        if not statecontroller.Controller.current_state == 'error':
+            ai_move = movetools.build_move(ai_move_code)
+            movementqueue.add_move(ai_move)
+        else:
+            print('AI MOVE ERRONEOUS!')

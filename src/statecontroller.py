@@ -1,12 +1,7 @@
-from enum import Enum
-
-
-maxstate = 5
-error = False
-
-
-class State(Enum):
-    start, player, ai, gameover, incorrect = range(1, maxstate + 1)
+class Controller:
+    max_state = 5
+    move_error = False
+    current_state = 'start'
 
 
 def is_error():
@@ -15,12 +10,11 @@ def is_error():
 
 def error(error_code):
     # throw error light or otherwise
-    error = True
+    Controller.move_error = True
+    Controller.current_state = 'error'
     print('error: ' + error_code)
 
 
-"""
-def refreshstate():
-    # direct between states
-    # call on model after each move
-"""
+def reset_state():
+    Controller.current_state = 'start'
+
