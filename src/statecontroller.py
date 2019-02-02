@@ -5,7 +5,7 @@ class Controller:
 
 
 def is_error():
-    return error
+    return Controller.current_state == 'error';
 
 
 def error(error_code):
