@@ -32,14 +32,14 @@ class TestFlow(unittest.TestCase):
         movementqueue.print_queue()
 
     def test_ai_move(self):
-        ai.AI.get_ai_move('a2a4')
+        ai.get_ai_move('a2a4')
         movementqueue.print_queue()
 
     def test_both_move(self):
         move1 = buffer.read_buffer('p,m,c2c3')
         model.Model.record_player_move(move1)
         movementqueue.add_move(move1)
-        ai.AI.get_ai_move('a7a5')
+        ai.get_ai_move('a7a5')
         movementqueue.print_queue()
 
 

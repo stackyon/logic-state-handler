@@ -20,7 +20,7 @@ while not terminate:
     if not statecontroller.is_error():
         irs_move_code = buffer.read_buffer('p,m,e2e3')
         model.Model.record_player_move(irs_move_code)
-        ai.AI.get_ai_move('a7a5')
+        ai.get_ai_move('a7a5')
         movementqueue.print_queue()
     else:
         # determine undo if board error, add to movement queue

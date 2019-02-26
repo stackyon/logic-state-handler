@@ -1,4 +1,4 @@
-#A decomposition of moves into component pickups or placements
+# A decomposition of moves into component pickups or placements
 
 from enum import Enum
 
