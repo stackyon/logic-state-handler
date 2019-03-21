@@ -31,9 +31,10 @@ class TestFlow(unittest.TestCase):
         movementqueue.add_move(move1)
         movementqueue.print_queue()
 
-    def test_ai_move(self):
-        ai.get_ai_move('a2a4')
-        movementqueue.print_queue()
+    def test_ai_uci(self):
+        self.user_move()
+        fish = ai.StockfishAI
+        print(fish.get_ai_uci())
 
     def test_both_move(self):
         move1 = buffer.read_buffer('p,m,c2c3')
@@ -41,6 +42,11 @@ class TestFlow(unittest.TestCase):
         movementqueue.add_move(move1)
         ai.get_ai_move('a7a5')
         movementqueue.print_queue()
+
+    # helper functions
+    def user_move(self):
+        move1 = buffer.read_buffer('p,m,e2e3')
+        model.Model.record_player_move(move1)
 
 
 if __name__ == '__main__':
