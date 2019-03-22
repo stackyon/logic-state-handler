@@ -34,13 +34,15 @@ class TestFlow(unittest.TestCase):
     def test_ai_uci(self):
         self.user_move()
         fish = ai.StockfishAI()
-        print(fish.get_ai_uci())
+        uci = fish.get_ai_uci()
+        assert len(uci) == 4
 
     def test_both_move(self):
         move1 = buffer.read_buffer('p,m,c2c3')
         model.Model.record_player_move(move1)
         movementqueue.add_move(move1)
-        ai.get_ai_move('a7a5')
+        fish = ai.StockfishAI()
+        fish.get_ai_move()
         movementqueue.print_queue()
 
     # helper functions

@@ -15,8 +15,8 @@ class Model:
     def enter_move(move_uci):
         if chess.Move.from_uci(move_uci) in Model.chess_board.legal_moves:
             Model.chess_board.push(chess.Move.from_uci(move_uci))
-            print(Model.chess_board.unicode())
-            print('\n\n')
+            print(Model.chess_board.unicode().replace(u'.', u'〼'))
+            print('\n')
         else:
             print('ILLEGAL MOVE!')
 

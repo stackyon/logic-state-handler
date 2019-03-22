@@ -15,14 +15,14 @@ import movementqueue
 
 terminate = False
 
+fish = ai.StockfishAI()
+
 while not terminate:
-    buffer.read_buffer('p,m,e2e3')
+    irs_move_code = buffer.read_buffer()
     if not statecontroller.is_error():
-        irs_move_code = buffer.read_buffer('p,m,e2e3')
         model.Model.record_player_move(irs_move_code)
-        ai.get_ai_move('a7a5')
+        fish.get_ai_move()
         movementqueue.print_queue()
     else:
         # determine undo if board error, add to movement queue
         print('player move was invalid')
-    terminate = True

@@ -8,8 +8,9 @@ import movetools
 import statecontroller
 
 
-def read_buffer(dummy_buffer):
+def read_buffer():
     # read from the server instead of dummy
+    dummy_buffer = 'p,m,' + input('next move: ')
 
     move_codes = dummy_buffer.split(',')
     if move_codes[1] == 'm':
