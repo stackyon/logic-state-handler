@@ -33,7 +33,7 @@ class TestFlow(unittest.TestCase):
 
     def test_ai_uci(self):
         self.user_move()
-        fish = ai.StockfishAI
+        fish = ai.StockfishAI()
         print(fish.get_ai_uci())
 
     def test_both_move(self):
