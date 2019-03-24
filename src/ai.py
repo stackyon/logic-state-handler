@@ -16,12 +16,3 @@ class StockfishAI:
         self.engine.position(model.Model.chess_board)
         move = self.engine.go(movetime=2000)
         return move.bestmove.uci()
-
-    def get_ai_move(self):
-        ai_move_code = self.get_ai_uci()  # get uci from stockfish AI
-        model.Model.enter_move(ai_move_code)
-        if not statecontroller.Controller.current_state == 'error':
-            ai_move = movetools.build_move(ai_move_code)
-            movementqueue.add_move(ai_move)
-        else:
-            print('AI MOVE ERRONEOUS!')

@@ -8,14 +8,21 @@ import movetools
 import statecontroller
 
 
+last_buffer = ''
+
+
 def read_buffer():
     # read from the server instead of dummy
-    dummy_buffer = 'p,m,' + input('next move: ')
-
-    move_codes = dummy_buffer.split(',')
-    if move_codes[1] == 'm':
-        return movetools.build_move(move_codes[2])
-    if move_codes[1] == 'e':
-        statecontroller.error(move_codes[2])
-    else:
-        print('INVALID BUFFER!')
+    new_buffer = 'p,e,' + input('next move: ')
+    if not new_buffer == last_buffer:
+        new_buffer = last_buffer    # remember this input so it isn't duplicated
+        move_codes = new_buffer.split(',')
+        if move_codes[1] == 'm':
+            statecontroller.ready()
+            return move_codes[2]    # move uci
+        if move_codes[1] == 'e':
+            print('A new error was received!')
+            statecontroller.error(move_codes[2])
+            return move_codes[2]    # error code
+        else:
+            print('Invalid buffer!')

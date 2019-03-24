@@ -1,25 +1,41 @@
 import chess
 import movetools
+import statecontroller
+import tomb
 
 
 class Model:
 
-    chess_board = chess.Board()
+    def __init__(self):
+        self.chess_board = chess.Board()
+        self.graveyard = []
+        self.occupied_tombs = [0]*32    # initialize as all unoccupied
 
-    @staticmethod
-    def record_player_move(player_move):
+    def record_player_move(self, player_move):
         move_uci = movetools.get_uci(player_move)
-        Model.enter_move(move_uci)
+        self.enter_move(move_uci)
 
-    @staticmethod
-    def enter_move(move_uci):
-        if chess.Move.from_uci(move_uci) in Model.chess_board.legal_moves:
-            Model.chess_board.push(chess.Move.from_uci(move_uci))
-            print(Model.chess_board.unicode().replace(u'.', u'〼'))
+    def enter_move(self, move_uci):
+        if chess.Move.from_uci(move_uci) in self.chess_board.legal_moves:
+            pc_move = chess.Move.from_uci(move_uci) # python-chess move type
+            if self.chess_board.is_capture(pc_move):
+                self.entomb(self.chess_board.piece_at(pc_move.to_square))
+            self.chess_board.push(pc_move)
+            print(self.chess_board.unicode().replace(u'.', u'〼'))
             print('\n')
         else:
-            print('ILLEGAL MOVE!')
+            statecontroller.error('Illegal Move')
 
-    @staticmethod
-    def reset():
-        Model.chess_board = chess.Board()
+    def entomb(self, piece):
+        position = 0
+        for i in range(1, len(self.occupied_tombs)):
+            if self.occupied_tombs.get(i) == 0:
+                position = i
+                break
+        if position != 0:
+            self.graveyard.append(tomb.Tomb(piece, position))
+        else:
+            print('Graveyard is full!')
+
+    def reset(self):
+        self.chess_board = chess.Board()

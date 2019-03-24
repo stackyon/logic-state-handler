@@ -4,6 +4,7 @@ import movetools
 import model
 import ai
 import movementqueue
+import chess
 
 
 class TestFlow(unittest.TestCase):
@@ -44,6 +45,12 @@ class TestFlow(unittest.TestCase):
         fish = ai.StockfishAI()
         fish.get_ai_move()
         movementqueue.print_queue()
+
+    def test_entomb(self):
+        game = model.Model()
+        game.entomb(game.chess_board.piece_at('e2'))
+        for tomb in game.graveyard:
+            print('' + tomb.piece.piece_type + ' ' + tomb.position)
 
     # helper functions
     def user_move(self):
