@@ -27,12 +27,13 @@ class Model:
             statecontroller.error('Illegal Move')
 
     def entomb(self, piece):
-        position = 0
-        for i in range(1, len(self.occupied_tombs)):
-            if self.occupied_tombs.get(i) == 0:
+        position = None
+        for i in range(0, len(self.occupied_tombs) - 1):
+            if self.occupied_tombs[i] == 0:
                 position = i
                 break
-        if position != 0:
+        if position is not None:
+            self.occupied_tombs[position] = 1
             self.graveyard.append(tomb.Tomb(piece, position))
         else:
             print('Graveyard is full!')

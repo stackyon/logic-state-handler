@@ -12,7 +12,7 @@ class StockfishAI:
         self.engine = uci.popen_engine(STOCKFISH_PATH)
         self.engine.uci()
 
-    def get_ai_uci(self):
-        self.engine.position(model.Model.chess_board)
+    def get_ai_uci(self, game):
+        self.engine.position(game.chess_board)
         move = self.engine.go(movetime=2000)
         return move.bestmove.uci()
