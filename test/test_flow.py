@@ -67,9 +67,21 @@ class TestFlow(unittest.TestCase):
         game.enter_move('e2e3')
         save_num = game.save_board()
         game.enter_move('e7e6')
-        game.return_to_save(save_num)
+        game.load_board(save_num)
         print('current board:')
         print(game.to_string())
+
+    def test_load_from_file(self):
+        game = model.Model()
+        game.load_board_from_file(r'C:\Repositories\logic-state-handler\demo_boards', 0)
+        print(game.to_string())
+
+    def test_castling(self):
+        game = model.Model()
+        game.load_board_from_file(r'C:\Repositories\logic-state-handler\demo_boards', 0)
+        game.enter_move('d1b1')
+        print(game.to_string())
+
 
     # helper functions
     def print_graveyard(self, game):

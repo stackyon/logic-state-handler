@@ -18,3 +18,7 @@ def to_string():
         if movement.movement_type == 'down':
             start_string = 'put down at'
         return start_string + ' (' + str(movement.square_x) + ', ' + str(movement.square_y) + ')'
+
+
+def clear_queue():
+    Queu.e = []

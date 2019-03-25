@@ -10,7 +10,7 @@ class MovementType(Enum):
 
 
 class Movement:
-    def __init__(self, movement_type, squareX, squareY):
+    def __init__(self, movement_type, x, y):
         self.movement_type = movement_type  # MovementType
-        self.square_x = squareX    # int in place of letter
-        self.square_y = squareY
+        self.x = x    # int in place of letter
+        self.y = y
