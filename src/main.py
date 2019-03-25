@@ -24,13 +24,14 @@ while not terminate:
     irs_code = buffer.read_buffer()
     if statecontroller.is_ready():
         statecontroller.wait()  # current buffer has been acted upon
-        game.record_player_move(irs_code)
+        game.enter_move(irs_code)
         if not statecontroller.is_error():
             ai_uci = fish.get_ai_uci(game)
             game.enter_move(ai_uci)
+            movementqueue.add_move(movetools.build_move(ai_uci))
         if not statecontroller.is_error():
             movementqueue.add_move(movetools.build_move(ai_uci))
-            movementqueue.print_queue()
+            print(movementqueue.to_string())
     elif statecontroller.is_error():
         # determine undo if board error, add to movement queue
         print('player move was invalid!')

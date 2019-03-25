@@ -10,10 +10,7 @@ class Model:
         self.chess_board = chess.Board()
         self.graveyard = []
         self.occupied_tombs = [0]*32    # initialize as all unoccupied
-
-    def record_player_move(self, player_move):
-        move_uci = movetools.get_uci(player_move)
-        self.enter_move(move_uci)
+        self.saves = []
 
     def enter_move(self, move_uci):
         if chess.Move.from_uci(move_uci) in self.chess_board.legal_moves:
@@ -21,8 +18,7 @@ class Model:
             if self.chess_board.is_capture(pc_move):
                 self.entomb(self.chess_board.piece_at(pc_move.to_square))
             self.chess_board.push(pc_move)
-            print(self.chess_board.unicode().replace(u'.', u'〼'))
-            print('\n')
+            print(self.to_string())
         else:
             statecontroller.error('Illegal Move')
 
@@ -40,3 +36,17 @@ class Model:
 
     def reset(self):
         self.chess_board = chess.Board()
+
+    def save_board(self):
+        # returns save file_num
+        new_save = self.chess_board.board_fen()
+        self.saves.append(new_save)
+        return len(self.saves) - 1
+
+    def return_to_save(self, file_num):
+        save = self.saves[file_num]
+        self.chess_board.set_board_fen(save)
+
+    def to_string(self):
+        return self.chess_board.unicode().replace(u'.', u'〼').replace(u'·', u'〼')
+        + '\n'

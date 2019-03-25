@@ -1,18 +1,18 @@
-
-queue = []
+class Queu:
+    e = []
 
 
 def add_move(move):
     for movement in move.movements:
-        queue.append(movement)
+        Queu.e.append(movement)
 
 
 def add_movement(movement):
-    queue.append(movement)
+    Queu.e.append(movement)
 
 
-def print_queue():
-    for movement in queue:
+def to_string():
+    for movement in Queu.e:
         if movement.movement_type == 'up':
             start_string = 'pick up at'
         if movement.movement_type == 'down':

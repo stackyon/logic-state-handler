@@ -58,11 +58,20 @@ class TestFlow(unittest.TestCase):
         game.entomb(game.chess_board.piece_at(chess.E1))
         self.print_graveyard(game)
 
-    # helper functions
-    def user_move(self):
-        move1 = buffer.read_buffer('p,m,e2e3')
-        model.Model.record_player_move(move1)
+    def test_movement_queue(self):
+        movementqueue.add_move(movetools.build_move('e2e3'))
+        print(movementqueue.to_string())
 
+    def test_save_state(self):
+        game = model.Model()
+        game.enter_move('e2e3')
+        save_num = game.save_board()
+        game.enter_move('e7e6')
+        game.return_to_save(save_num)
+        print('current board:')
+        print(game.to_string())
+
+    # helper functions
     def print_graveyard(self, game):
         for tomb in game.graveyard:
             print('' + tomb.piece.symbol() + ' ' + str(tomb.position))

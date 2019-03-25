@@ -8,14 +8,15 @@ import movetools
 import statecontroller
 
 
-last_buffer = ''
+class BufferHold:
+    last_buffer = ''
 
 
 def read_buffer():
     # read from the server instead of dummy
-    new_buffer = 'p,e,' + input('next move: ')
-    if not new_buffer == last_buffer:
-        new_buffer = last_buffer    # remember this input so it isn't duplicated
+    new_buffer = 'p,m,' + input('next move: ')
+    if not new_buffer == BufferHold.last_buffer:
+        BufferHold.last_buffer = new_buffer   # remember this input so it isn't duplicated
         move_codes = new_buffer.split(',')
         if move_codes[1] == 'm':
             statecontroller.ready()
