@@ -5,6 +5,7 @@ import model
 import ai
 import movementqueue
 import chess
+import statecontroller
 
 
 class TestFlow(unittest.TestCase):
@@ -82,11 +83,32 @@ class TestFlow(unittest.TestCase):
         game.enter_move('d1b1')
         print(game.to_string())
 
-
-    # helper functions
-    def print_graveyard(self, game):
-        for tomb in game.graveyard:
-            print('' + tomb.piece.symbol() + ' ' + str(tomb.position))
+    def test_demo(self):
+        game = model.Model()
+        fish = ai.StockfishAI()
+        while True:
+            command = input('>> ')
+            parts = command.split(' ')
+            statecontroller.ready()
+            try:
+                if parts[0] == 'm':
+                    game.enter_move(parts[1])
+                    if not statecontroller.is_error():
+                        ai_uci = fish.get_ai_uci(game)
+                        game.enter_move(ai_uci)
+                    if not statecontroller.is_error():
+                        movementqueue.add_move(movetools.build_move(ai_uci))
+                    print(movementqueue.to_string())
+                elif command == 'save':
+                    game.save_board()
+                elif parts[0] == 'load':
+                    game.load_board(int(parts[1]))
+                elif parts[0] == 'fileload':
+                    game.load_board_from_file(r'C:\Repositories\logic-state-handler\demo_boards', int(parts[1]))
+                else:
+                    pass
+            except Exception as e:
+                print(e)
 
 
 if __name__ == '__main__':

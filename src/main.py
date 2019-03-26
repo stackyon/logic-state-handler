@@ -28,7 +28,6 @@ while not terminate:
         if not statecontroller.is_error():
             ai_uci = fish.get_ai_uci(game)
             game.enter_move(ai_uci)
-            movementqueue.add_move(movetools.build_move(ai_uci))
         if not statecontroller.is_error():
             movementqueue.add_move(movetools.build_move(ai_uci))
             print(movementqueue.to_string())

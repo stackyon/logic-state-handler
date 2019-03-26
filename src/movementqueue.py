@@ -4,7 +4,7 @@ class Queu:
 
 def add_move(move):
     for movement in move.movements:
-        Queu.e.append(movement)
+        add_movement(movement)
 
 
 def add_movement(movement):
@@ -12,12 +12,14 @@ def add_movement(movement):
 
 
 def to_string():
+    representation = ''
     for movement in Queu.e:
         if movement.movement_type == 'up':
             start_string = 'pick up at'
         if movement.movement_type == 'down':
             start_string = 'put down at'
-        return start_string + ' (' + str(movement.square_x) + ', ' + str(movement.square_y) + ')'
+        representation += start_string + ' (' + str(movement.x) + ', ' + str(movement.y) + ')\n'
+    return representation
 
 
 def clear_queue():
