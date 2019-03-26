@@ -6,6 +6,7 @@ import ai
 import movementqueue
 import chess
 import statecontroller
+from config import DEMO_BOARDS
 
 
 class TestFlow(unittest.TestCase):
@@ -74,12 +75,12 @@ class TestFlow(unittest.TestCase):
 
     def test_load_from_file(self):
         game = model.Model()
-        game.load_board_from_file(r'C:\Repositories\logic-state-handler\demo_boards', 0)
+        game.load_board_from_file(DEMO_BOARDS, 0)
         print(game.to_string())
 
     def test_castling(self):
         game = model.Model()
-        game.load_board_from_file(r'C:\Repositories\logic-state-handler\demo_boards', 0)
+        game.load_board_from_file(DEMO_BOARDS, 0)
         game.enter_move('d1b1')
         print(game.to_string())
 
@@ -104,7 +105,7 @@ class TestFlow(unittest.TestCase):
                 elif parts[0] == 'load':
                     game.load_board(int(parts[1]))
                 elif parts[0] == 'fileload':
-                    game.load_board_from_file(r'C:\Repositories\logic-state-handler\demo_boards', int(parts[1]))
+                    game.load_board_from_file(DEMO_BOARDS, int(parts[1]))
                 else:
                     pass
             except Exception as e:
