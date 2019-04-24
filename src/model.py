@@ -13,15 +13,20 @@ class Model:
         self.saves = []
 
     def enter_move(self, move_uci):
+        attack_string = ''
         if chess.Move.from_uci(move_uci) in self.chess_board.legal_moves:
             pc_move = chess.Move.from_uci(move_uci)     # python-chess move type
             if self.chess_board.is_capture(pc_move) \
                     and not self.chess_board.piece_at(pc_move.to_square).piece_type == chess.PAWN:
-                self.entomb(self.chess_board.piece_at(pc_move.to_square))
+                tomb_num = self.entomb(self.chess_board.piece_at(pc_move.to_square))
+                attack_string = move_uci[2:] + 'x' + str(tomb_num)
+            elif self.chess_board.is_capture(pc_move):  # piece is pawn
+                attack_string = move_uci[2:] + 'x0'     # represents pawn-graveyard
             self.chess_board.push(pc_move)
             print(self.to_string())
         else:
             statecontroller.error('Illegal Move')
+        return attack_string
 
     def entomb(self, piece):
         position = None
@@ -35,6 +40,7 @@ class Model:
             print(self.graveyard_to_string())
         else:
             print('Grave is full!')
+        return position
 
     def reset(self):
         self.chess_board = chess.Board()
