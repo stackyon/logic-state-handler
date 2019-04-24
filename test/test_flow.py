@@ -106,7 +106,10 @@ class TestFlow(unittest.TestCase):
                     game.load_board(int(parts[1]))
                 elif parts[0] == 'fileload':
                     game.load_board_from_file(DEMO_BOARDS, int(parts[1]))
+                elif parts[0] == 'pop':
+                    print(movementqueue.pop_move())
                 else:
+                    print('invalid command')
                     pass
             except Exception as e:
                 print(e)
