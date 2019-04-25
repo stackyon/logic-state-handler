@@ -101,6 +101,7 @@ class TestFlow(unittest.TestCase):
                         movementqueue.add_move(movetools.build_move(ai_uci))
                     print(movementqueue.to_string())
                 elif command == 'save':
+
                     game.save_board()
                 elif parts[0] == 'load':
                     game.load_board(int(parts[1]))
